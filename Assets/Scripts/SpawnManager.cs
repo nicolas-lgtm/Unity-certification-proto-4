@@ -9,11 +9,13 @@ public class SpawnManager : MonoBehaviour
     public float posRange = 9.0f;
     private int enemiesAlive;
     private int level = 1;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnEnemyWaves(level);
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     {
         enemiesAlive = FindObjectsOfType<Enemy>().Length;
 
-        if (enemiesAlive == 0)
+        if (enemiesAlive == 0 && gameManager.gameIsActive)
         {
             level++;
             SpawnEnemyWaves(level);
